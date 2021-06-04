@@ -1,2 +1,59 @@
 WebAssembly test. C -> WebAssembly w/o Emscripten.
 Using only llvm + clang with WebAssembly target.
+
+This is basically the copy example from this article and some glue:
+
+https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/
+
+Requirements:
+ * llvm / clang with target WebAssembly
+
+On gentoo, add to package.use:
+
+*/* LLVM_TARGETS: WebAssembly
+
+Also enable use-flag default-lld to depend on sys-devel/lld, or install
+it separately.
+
+If you get an error like:
+
+wasm-ld: error: cannot open /usr/lib/clang/11.1.0/lib/wasi/libclang_rt.builtins-wasm32.a: No such file or directory
+
+You need to install libclang_rt_builtins-wasm32.a. The easiest is to install
+it pre-compiled from:
+
+https://github.com/WebAssembly/wasi-sdk/releases/tag/wasi-sdk-12
+
+The missing file is in the libclang_rt.builtins-wasm32-wasi-12.0.tar.gz
+gzip. Unpack it and copy the .a file to where clang wants it to be.
+In my case /usr/lib/clang/11.1.0/lib/wasi/. I had to create the wasi
+directory first.
+
+Another option is to compile the entire wasi-sdk from the same page
+or download a pre-compiled wasi-sdk toolchain.
+
+NOTE: Update submodules to get wasi-libc before running make
+
+ git submodule update --init --recursive
+ make
+
+To try it out, start a test webserver with:
+
+ python -m http.server
+
+and visit http://localhost:8000/copy.html
+
+Open up the javascript console (More tools->Developer tools in chrome).
+You should see the following text:
+
+copy.html:30  copy length 22
+copy.html:31  copy Hello from JavaScript!
+
+Now everything works and you can start writing your own WebAssembly
+apps - in C - without Emscripten.
+
+Albert Teobas Veli
+Setting Orange,
+the 9th day of Confusion in the Year of Our Lady of Discord 3187
+
+       ~~=) All Rights Reversed - No Rights Reserved (=~~
