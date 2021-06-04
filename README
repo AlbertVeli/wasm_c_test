@@ -1,0 +1,2 @@
+WebAssembly test. C -> WebAssembly w/o Emscripten.
+Using only llvm + clang with WebAssembly target.
