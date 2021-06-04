@@ -16,9 +16,12 @@ all: copy.wasm canvas.wasm
 	@echo "start local webserver with: python -m http.server"
 	@echo "and visit - http://localhost:8000/"
 
-$(BUILD):
+$(BUILD): wasi-libc
 	make -C wasi-libc install INSTALL_DIR=../$(BUILD)
 	touch $@
+
+wasi-libc:
+	git submodule update --init --recursive
 
 .PHONY: clean
 
