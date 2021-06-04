@@ -1,17 +1,20 @@
 CC = clang
 
-CFLAGS = --target=wasm32-wasi --sysroot $(PWD)/$(BUILD) -nostartfiles -Wl,--import-memory -Wl,--no-entry -Wl,--export-all
-LDFLAGS =
+WFLAGS = -Os -W -Wall
+SYSFLAGS = --target=wasm32-wasi --sysroot $(PWD)/$(BUILD) -nostartfiles
+LDFLAGS = -Wl,--import-memory -Wl,--no-entry -Wl,--export-all
+CFLAGS = $(WFLAGS) $(SYSFLAGS) $(LDFLAGS)
+LIBS =
 
 BUILD = wasi-libc-build
 
 %.wasm: %.c $(BUILD)
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 
-all: copy.wasm
-	@echo "$< ready"
-	@echo "start local webserver wih python -m http.server"
-	@echo "and visit http://localhost:8000/copy.html"
+all: copy.wasm canvas.wasm
+	@echo "Done"
+	@echo "start local webserver with: python -m http.server"
+	@echo "and visit - http://localhost:8000/"
 
 $(BUILD):
 	make -C wasi-libc install INSTALL_DIR=../$(BUILD)

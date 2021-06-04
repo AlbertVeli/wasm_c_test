@@ -1,9 +1,16 @@
 WebAssembly test. C -> WebAssembly w/o Emscripten.
 Using only llvm + clang with WebAssembly target.
 
-This is basically the copy example from this article and some glue:
+The copy example is from this article + some glue:
 
 https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/
+
+and the canvas example is inspired by this article:
+
+https://compile.fi/canvas-filled-three-ways-js-webassembly-and-webgl/
+
+The canvas article uses Emscripten though, this is clean
+clang.
 
 Requirements:
  * llvm / clang with target WebAssembly
@@ -41,19 +48,17 @@ To try it out, start a test webserver with:
 
  python -m http.server
 
-and visit http://localhost:8000/copy.html
+and visit http://localhost:8000/
 
-Open up the javascript console (More tools->Developer tools in chrome).
-You should see the following text:
+copy.html writes to the javascript console and canvas.html draws
+pixels to a C-array which is copied to a HTML canvas object by
+javascript.
 
-copy.html:30  copy length 22
-copy.html:31  copy Hello from JavaScript!
-
-Now everything works and you can start writing your own WebAssembly
+If everything works you can start writing your own WebAssembly
 apps - in C - without Emscripten.
 
 Albert Teobas Veli
 Setting Orange,
 the 9th day of Confusion in the Year of Our Lady of Discord 3187
 
-       ~~=) All Rights Reversed - No Rights Reserved (=~~
+      ~~=) All Rights Reversed - No Rights Reserved (=~~
