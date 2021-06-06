@@ -12,6 +12,9 @@ https://compile.fi/canvas-filled-three-ways-js-webassembly-and-webgl/
 The canvas article uses Emscripten though, this is clean
 clang.
 
+Fire is very similar to canvas except it actually draws something
+on the canvas. A classical fire effect.
+
 Requirements:
  * llvm / clang with target WebAssembly
 

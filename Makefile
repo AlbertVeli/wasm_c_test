@@ -11,7 +11,7 @@ BUILD = wasi-libc-build
 %.wasm: %.c $(BUILD)
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 
-all: copy.wasm canvas.wasm
+all: copy.wasm canvas.wasm fire.wasm
 	@echo "Done"
 	@echo "start local webserver with: python -m http.server"
 	@echo "and visit - http://localhost:8000/"
