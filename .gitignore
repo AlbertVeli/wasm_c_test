@@ -1,2 +1,4 @@
 *.wasm
+*.o
+createvideo
 wasi-libc-build

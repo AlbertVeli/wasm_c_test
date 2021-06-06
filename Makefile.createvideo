@@ -1,0 +1,12 @@
+CC = gcc
+CFLAGS = -O3 -pipe -W -Wall
+
+OBJS = fire.o createvideo.o
+
+createvideo: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
+
+.PHONY: clean
+
+clean:
+	rm -f *.o createvideo frame*.png frame*.raw *~

@@ -1,11 +1,10 @@
 #include <stdlib.h>
 
 unsigned int *screen = NULL;
+unsigned char *fire = NULL;
+unsigned int *palette = NULL;
 
-/* static means these won't be exported */
-static unsigned char *fire = NULL;
-static unsigned int *palette = NULL;
-
+/* static means these variables and functions won't be exported */
 static int width = 0;
 static int height = 0;
 static int pixels = 0;
