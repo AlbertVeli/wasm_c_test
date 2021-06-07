@@ -9,4 +9,4 @@ createvideo: $(OBJS)
 .PHONY: clean
 
 clean:
-	rm -f *.o createvideo frame*.png frame*.raw *~
+	rm -f *.o createvideo frame*.png frame*.data *~

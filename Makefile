@@ -23,10 +23,16 @@ $(BUILD): wasi-libc
 wasi-libc:
 	git submodule update --init --recursive
 
+createvideo:
+	make -f Makefile.createvideo
+	# Could insert convert + ffmpeg commands here
+	# see output from createvideo
+
 .PHONY: clean
 
 clean:
 	rm -f *.wasm *~
+	make -f Makefile.createvideo clean
 
 distclean: clean
 	rm -rf $(BUILD)
